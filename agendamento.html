@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetShop Amigo Fiel - Cadastro e Agendamento</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+
+    <header>
+        <div class="d-flex flex-wrap justify-content-between align-items-start gap-3">
+            <div>
+                <h1>PetShop Amigo Fiel</h1>
+                <p>Cadastro de Cliente, Pet e Agendamento Online</p>
+            </div>
+            <div id="status-funcionamento" class="barra-temporal" aria-live="polite"></div>
+        </div>
+        <hr>
+        <nav aria-label="Navegação Principal">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="produtos.html">Produtos</a></li>
+                <li><a href="servicos.html">Serviços</a></li>
+                <li><a href="agendamento.html" aria-current="page">Cadastro &amp; Agendamento</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
+        </nav>
+        <hr>
+    </header>
+
+    <main id="conteudo-principal" tabindex="-1">
+        <section>
+            <h2>Cadastro e Agendamento de Serviços</h2>
+            <p>Preencha os dados do tutor, as informações do seu pet e escolha o serviço de banho ou tosa com a data e horário desejados.</p>
+
+            <div id="confirmacao-agendamento" class="alerta-sucesso d-none mb-4" role="status" aria-live="polite" tabindex="-1"></div>
+
+            <form id="form-agendamento" class="form-completo" action="#" method="post">
+                
+                <fieldset class="bloco-fieldset">
+                    <legend>1. Dados de Identificação do Cliente</legend>
+
+                    <div class="row g-3">
+                        <div class="col-md-8">
+                            <label for="nomeCliente">Nome Completo *</label>
+                            <input type="text" id="nomeCliente" name="nomeCliente" placeholder="Ex.: Maria Fernanda Silva" required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="cpf">CPF *</label>
+                            <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" maxlength="14" required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <span class="label-grupo">Sexo *</span>
+                            <div class="grupo-opcoes">
+                                <label class="opcao-inline" for="sexoF">
+                                    <input type="radio" id="sexoF" name="sexoCliente" value="Feminino" required> Feminino
+                                </label>
+                                <label class="opcao-inline" for="sexoM">
+                                    <input type="radio" id="sexoM" name="sexoCliente" value="Masculino"> Masculino
+                                </label>
+                                <label class="opcao-inline" for="sexoO">
+                                    <input type="radio" id="sexoO" name="sexoCliente" value="Outro"> Outro
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="telefone">Telefone / WhatsApp *</label>
+                            <input type="tel" id="telefone" name="telefone" placeholder="(51) 99999-9999" maxlength="15" required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="emailCliente">E-mail *</label>
+                            <input type="email" id="emailCliente" name="emailCliente" placeholder="cliente@exemplo.com.br" required>
+                        </div>
+
+                        <div class="col-md-8">
+                            <label for="endereco">Endereço Completo (Rua, Número, Bairro) *</label>
+                            <input type="text" id="endereco" name="endereco" placeholder="Ex.: Rua Pref. José Linck, 450 - Centro" required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="cidade">Cidade / UF *</label>
+                            <input type="text" id="cidade" name="cidade" value="Gravataí / RS" placeholder="Cidade / UF" required>
+                        </div>
+                    </div>
+                </fieldset>
+
+        
+                <fieldset class="bloco-fieldset">
+                    <legend>2. Identificação do Pet</legend>
+
+                    <div class="row g-3">
+                        <div class="col-md-5">
+                            <label for="nomePet">Nome do Pet *</label>
+                            <input type="text" id="nomePet" name="nomePet" placeholder="Ex.: Thor, Luna, Mel" required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="racaPet">Raça *</label>
+                            <input type="text" id="racaPet" name="racaPet" placeholder="Ex.: Golden Retriever, SRD, Persa" required>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="idadePet">Idade (em anos) *</label>
+                            <input type="number" id="idadePet" name="idadePet" min="0" max="30" step="1" placeholder="Ex.: 3" required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="especiePet">Espécie *</label>
+                            <select id="especiePet" name="especiePet" required>
+                                <option value="">Selecione...</option>
+                                <option value="Cachorro">Cachorro</option>
+                                <option value="Gato">Gato</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-8">
+                            <span class="label-grupo">Cuidados Especiais / Observações (Opcional)</span>
+                            <div class="grupo-opcoes">
+                                <label class="opcao-inline" for="checkAlergia">
+                                    <input type="checkbox" id="checkAlergia" name="cuidados[]" value="Alergia"> Pele sensível / Alergia
+                                </label>
+                                <label class="opcao-inline" for="checkIdoso">
+                                    <input type="checkbox" id="checkIdoso" name="cuidados[]" value="Idoso"> Pet idoso
+                                </label>
+                                <label class="opcao-inline" for="checkAgitado">
+                                    <input type="checkbox" id="checkAgitado" name="cuidados[]" value="Agitado"> Pet agitado / medroso
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+            
+                <fieldset class="bloco-fieldset">
+                    <legend>3. Escolha do Serviço e Agendamento</legend>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <span class="label-grupo">Selecione o Serviço *</span>
+                            <div class="lista-cards-radio">
+                                <label class="card-radio" for="servBanho">
+                                    <input type="radio" id="servBanho" name="servico" value="Banho Simples" data-preco="45" checked required>
+                                    <span>
+                                        <strong>Banho</strong><br>
+                                        <small>Shampoo neutro, secagem, escovação e limpeza auricular (R$ 45,00)</small>
+                                    </span>
+                                </label>
+
+                                <label class="card-radio" for="servTosa">
+                                    <input type="radio" id="servTosa" name="servico" value="Tosa" data-preco="55">
+                                    <span>
+                                        <strong>Tosa (Higiênica ou da Raça)</strong><br>
+                                        <small>Corte de unhas, higienização das patas e tosa especializada (R$ 55,00)</small>
+                                    </span>
+                                </label>
+
+                                <label class="card-radio" for="servBanhoTosa">
+                                    <input type="radio" id="servBanhoTosa" name="servico" value="Banho e Tosa Completa" data-preco="90">
+                                    <span>
+                                        <strong>Combo: Banho + Tosa Completa</strong><br>
+                                        <small>Banho especial, hidratação e tosa completa (R$ 90,00)</small>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <span class="label-grupo">Método de Atendimento (Modalidade) *</span>
+                            <div class="lista-cards-radio">
+                                <label class="card-radio" for="modLocal">
+                                    <input type="radio" id="modLocal" name="modalidade" value="Entrega no Local" data-taxa="0" checked required>
+                                    <span>
+                                        <strong>Entrega do Pet no Local</strong><br>
+                                        <small>Você leva e busca o pet na Av. dos Estados, 1500 (Sem taxa adicional)</small>
+                                    </span>
+                                </label>
+
+                                <label class="card-radio" for="modTelebusca">
+                                    <input type="radio" id="modTelebusca" name="modalidade" value="Tele-Busca" data-taxa="30">
+                                    <span>
+                                        <strong>Tele-Busca Domiciliar</strong><br>
+                                        <small>Buscamos e devolvemos no endereço cadastrado em Gravataí (+ R$ 30,00)</small>
+                                    </span>
+                                </label>
+                            </div>
+                            <p id="info-telebusca" class="nota-telebusca d-none mt-2">
+                                * O motorista da Tele-Busca passará 30 minutos antes do horário agendado no endereço informado acima.
+                            </p>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="dataAgendamento">Data do Agendamento (Calendário) *</label>
+                            <input type="date" id="dataAgendamento" name="dataAgendamento" required>
+                            <small id="aviso-data" class="text-danger fw-bold d-none d-block mt-1"></small>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="horaAgendamento">Horário Preferencial *</label>
+                            <input type="time" id="horaAgendamento" name="horaAgendamento" min="08:00" max="18:00" required>
+                            <small class="text-muted d-block mt-1">Atendimento das 08:00 às 18:00</small>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="caixa-resumo-valor" aria-live="polite">
+                                <span>Valor Total Estimado</span>
+                                <strong id="valor-estimado">R$ 45,00</strong>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="obsAdicionais">Observações Adicionais ao Tosador / Banhista</label>
+                            <textarea id="obsAdicionais" name="obsAdicionais" rows="3" placeholder="Ex.: Preferência de corte, nome do shampoo próprio, temperamento..."></textarea>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="opcao-inline" for="aceiteTermos">
+                                <input type="checkbox" id="aceiteTermos" name="aceiteTermos" required>
+                                Confirmo que as informações acima são verdadeiras e concordo com os termos de atendimento do PetShop Amigo Fiel. *
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="d-flex flex-wrap gap-3 mt-4">
+                    <button type="submit">Confirmar Cadastro e Agendamento</button>
+                    <button type="reset" class="btn-secundario">Limpar Formulário</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <hr>
+        <p><strong>PetShop Amigo Fiel LTDA</strong> | CNPJ: 00.123.456/0001-89</p>
+        <p>Endereço: Av. dos Estados, 1500 - Centro - Gravataí / RS</p>
+        <p>Telefone / WhatsApp: (51) 99999-8888 | E-mail: contato@petshopamigofiel.com.br</p>
+        <nav aria-label="Navegação do Rodapé">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="produtos.html">Produtos</a></li>
+                <li><a href="servicos.html">Serviços</a></li>
+                <li><a href="agendamento.html">Cadastro &amp; Agendamento</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
+        </nav>
+        <p>&copy; 2026 PetShop Amigo Fiel. Todos os direitos reservados. Projeto PUC-RS - Fase 2.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
